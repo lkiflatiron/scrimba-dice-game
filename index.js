@@ -22,7 +22,6 @@ function showResetButton() {
     const randomNumber = Math.floor(Math.random() * 6) + 1
     if (player1Turn) {
         player1Score += randomNumber;
-        console.log("are you here");
         addDice(randomNumber, player1Turn);
         player1Scoreboard.textContent = player1Score
         if (player1Score < 20) {
@@ -90,7 +89,6 @@ function reset() {
 /* Choose dice image based on random number */
 function addDice(randomNumber, player1Turn) {
   let image = 'dice' + randomNumber + '.png';
-  console.log(image);
   if (player1Turn) {
     player1Dice.style.backgroundColor = "transparent";
     addAnimation(player1Dice);
