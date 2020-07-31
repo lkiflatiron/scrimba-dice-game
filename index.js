@@ -19,39 +19,46 @@ function showResetButton() {
 
 /* Hook up a click event listener to the Roll Dice Button. */
  rollBtn.addEventListener("click", function() {
-    const randomNumber = Math.floor(Math.random() * 6) + 1
+    const randomNumber = Math.floor(Math.random() * 6) + 1;
+    
     if (player1Turn) {
-        player1Score += randomNumber;
-        addDice(randomNumber, player1Turn);
-        player1Scoreboard.textContent = player1Score
-        if (player1Score < 20) {
-          setTimeout(() => {
-            player1Dice.classList.remove("active")
-            player2Dice.classList.add("active")
-            message.textContent = "Player 2 Turn"
-            removeAnimation();
-        }, 1000);
+      player1Score += randomNumber;
+      addDice(randomNumber, player1Turn);
+      if (player1Score < 20) {
+        setTimeout(() => {
+          player1Scoreboard.textContent = player1Score
+          player1Dice.classList.remove("active")
+          player2Dice.classList.add("active")
+          message.textContent = "Player 2 Turn"
+          removeAnimation();
+        }, 1500);
       }
     } else {
-        player2Score += randomNumber
-        addDice(randomNumber, player1Turn);
-        player2Scoreboard.textContent = player2Score
-        if (player2Score < 20) {
-          setTimeout(() => {
-            player2Dice.classList.remove("active")
-            player1Dice.classList.add("active")
-            message.textContent = "Player 1 Turn"
-            removeAnimation();
-          }, 1000);
-        }
+      player2Score += randomNumber
+      addDice(randomNumber, player1Turn);
+      if (player2Score < 20) {
+        setTimeout(() => {
+          player2Scoreboard.textContent = player2Score
+          player2Dice.classList.remove("active")
+          player1Dice.classList.add("active")
+          message.textContent = "Player 1 Turn"
+          removeAnimation();
+        }, 1500);
+      }
     }
     
     if (player1Score >= 20) {
-        message.textContent = "Player 1 Wins 🥳"
-        processWin(player1Dice);
-    }  else if (player2Score >= 20) {
+        setTimeout(() => {
+          message.textContent = "Player 1 Wins 🥳"
+          player1Scoreboard.textContent = player1Score
+          processWin(player1Dice);
+        }, 1500);
+    } else if (player2Score >= 20) {
+      setTimeout(() => {
+        player2Scoreboard.textContent = player2Score
         message.textContent = "Player 2 Wins 🎉"
         processWin(player2Dice);
+      }, 1500);
     }
     player1Turn = !player1Turn
 });
@@ -82,6 +89,7 @@ function reset() {
     rollBtn.style.display = "block"
     player2Dice.classList.remove("active")
     player1Dice.classList.add("active")
+    removeAnimation();
     player1Dice.style.backgroundColor = '#ffd3b6';
     player2Dice.style.backgroundColor = '#ffd3b6';
 }
@@ -91,25 +99,17 @@ function addDice(randomNumber, player1Turn) {
   let image = 'dice' + randomNumber + '.png';
   if (player1Turn) {
     player1Dice.style.backgroundColor = "transparent";
-    addAnimation(player1Dice);
+    player1Dice.classList.add('spin');
     player1Dice.innerHTML = `<img src='img/${image}' class='dice' alt='dice'>`;
   } else {
     player2Dice.style.backgroundColor = 'transparent';
-    addAnimation(player2Dice);
+    player2Dice.classList.add('spin');
     player2Dice.innerHTML = `<img src='img/${image}' class='dice' alt='dice'>`;
   }
 }
 
-/* Add dice animation classes */
-function addAnimation(playerDice) {
-  playerDice.classList.add('animate__animated');
-  playerDice.classList.add('animate__rotateIn');
-}
-
 /* remove dice animation classes */
 function removeAnimation() {
-  player1Dice.classList.remove('animate__animated');
-  player1Dice.classList.remove('animate__rotateIn');
-  player2Dice.classList.remove('animate__animated');
-  player2Dice.classList.remove('animate__rotateIn');
+  player1Dice.classList.remove('spin');
+  player2Dice.classList.remove('spin');
 }
