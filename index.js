@@ -20,9 +20,9 @@ function showResetButton() {
 /* Hook up a click event listener to the Roll Dice Button. */
  rollBtn.addEventListener("click", function() {
     const randomNumber = Math.floor(Math.random() * 6) + 1
-
     if (player1Turn) {
-        player1Score += randomNumber
+        player1Score += randomNumber;
+        console.log("are you here");
         addDice(randomNumber, player1Turn);
         player1Scoreboard.textContent = player1Score
         if (player1Score < 20) {
@@ -31,7 +31,7 @@ function showResetButton() {
             player2Dice.classList.add("active")
             message.textContent = "Player 2 Turn"
             removeAnimation();
-        }, 1250);
+        }, 1000);
       }
     } else {
         player2Score += randomNumber
@@ -43,7 +43,7 @@ function showResetButton() {
             player1Dice.classList.add("active")
             message.textContent = "Player 1 Turn"
             removeAnimation();
-          }, 1250);
+          }, 1000);
         }
     }
     
