@@ -19,11 +19,11 @@ function showResetButton() {
 
 /* Hook up a click event listener to the Roll Dice Button. */
  rollBtn.addEventListener("click", function() {
-    const randomNumber = 1;
+    const diceNumber = 1;
     
     if (player1Turn) {
-      player1Score += randomNumber;
-      addDice(randomNumber, player1Turn);
+      player1Score += diceNumber;
+      addDice(diceNumber, player1Turn);
       if (player1Score < 20) {
         setTimeout(() => {
           player1Scoreboard.textContent = player1Score
@@ -34,8 +34,8 @@ function showResetButton() {
         }, 1500);
       }
     } else {
-      player2Score += randomNumber
-      addDice(randomNumber, player1Turn);
+      player2Score += diceNumber
+      addDice(diceNumber, player1Turn);
       if (player2Score < 20) {
         setTimeout(() => {
           player2Scoreboard.textContent = player2Score
@@ -95,8 +95,8 @@ function reset() {
 }
 
 /* Choose dice image based on random number */
-function addDice(randomNumber, player1Turn) {
-  let image = 'dice' + randomNumber + '.png';
+function addDice(diceNumber, player1Turn) {
+  let image = 'dice' + diceNumber + '.png';
   if (player1Turn) {
     player1Dice.style.backgroundColor = "transparent";
     player1Dice.classList.add('spin');
