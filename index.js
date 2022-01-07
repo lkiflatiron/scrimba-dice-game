@@ -19,7 +19,7 @@ function showResetButton() {
 
 /* Hook up a click event listener to the Roll Dice Button. */
  rollBtn.addEventListener("click", function() {
-    const randomNumber = Math.floor(Math.random() * 6) + 1;
+    const randomNumber = 1;
     
     if (player1Turn) {
       player1Score += randomNumber;
